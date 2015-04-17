@@ -53,8 +53,8 @@ angular.module('chatterApp')
 
     function success(position) {
 
-      //coords['lat'] = position.coords.latitude;
-      //coords['lon'] = position.coords.longitude;
+      coords['lat'] = position.coords.latitude;
+      coords['lon'] = position.coords.longitude;
 
       $scope.messages = $firebaseArray(Ref.child('messages').limitToLast(10));
       $scope.messages.$loaded().catch(alert);
