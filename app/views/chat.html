@@ -1,0 +1,74 @@
+<div class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#/">chatter</a>
+          </div>
+
+        </div>
+      </div>	
+
+<!--
+<div class="container">
+<h2>Chat</h2>
+
+<form>
+  <input placeholder="Message..." ng-model="newMessage">
+  <button type="submit" ng-click="addMessage(newMessage);newMessage = null;">send</button>
+</form>
+
+<ul id="messages" ng-show="messages.length">
+  <li ng-repeat="message in messages | reverse">{{message.text}}</li>
+</ul>
+
+<p class="alert alert-danger" ng-show="err">{{err}}</p>
+</div>
+
+-->
+
+
+<!--
+<form>
+  <input placeholder="Message..." ng-model="newMessage">
+  <button type="submit" ng-click="addMessage(newMessage);newMessage = null;">send</button>
+</form> -->
+<div class="container">
+<form ng-click="addMessage(newMessage);newMessage = null;">
+	<div class="input-group">
+		<input type="text" class="form-control" placeholder="Message..." ng-model="newMessage">
+		<div class="input-group-btn" >
+		<button class="btn btn-default" type="submit" >Submit</button></div>
+	</div>
+</form>
+
+<br>
+<hr>
+<br>
+
+<article>
+      <span id="status"><p>Finding your location: checking...</p></span>
+</article>
+
+
+
+
+<!--
+<ul class="list-group" id="messages" ng-show="messages.length">
+  <li class="list-group-item"  ng-repeat="message in messages | reverse">{{message.text}} {{message.randNum}}</li>
+</ul> -->
+
+<table class="table table-striped">
+	<tr>
+		<th align="center">LAT</th>
+		<th align="center">Message</th>
+	</tr>
+
+	<tr ng-repeat="message in messages | reverse">
+		<td>{{message.gps.lat}}</td>
+		<td>{{message.text}}</td>
+	</tr>
+</table>
+
+<p class="alert alert-danger" ng-show="err">{{err}}</p>
+
+
+</div>
