@@ -70,6 +70,10 @@ angular.module('chatterApp')
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
       })
+      .when('/all', {
+        templateUrl: 'views/all.html',
+        controller: 'ChatCtrl'
+      })
       .whenAuthenticated('/account', {
         templateUrl: 'views/account.html',
         controller: 'AccountCtrl'
