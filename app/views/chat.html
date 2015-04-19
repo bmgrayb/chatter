@@ -62,7 +62,7 @@
 		<th align="center">Message</th>
 	</tr>
 
-	<tr ng-repeat="message in messages | reverse">
+	<tr ng-repeat="message in messages | reverse:this">
 		<td>{{message.gps.lat}}</td>
 		<td>{{message.text}}</td>
 	</tr>

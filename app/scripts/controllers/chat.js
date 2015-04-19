@@ -55,10 +55,13 @@ angular.module('chatterApp')
 
       coords['lat'] = position.coords.latitude;
       coords['lon'] = position.coords.longitude;
+      $scope.gps = coords;
 
-      $scope.messages = $firebaseArray(Ref.child('messages').limitToLast(10));
+      //var fbMsg = 
+      $scope.messages = $firebaseArray(Ref.child('messages'));
       $scope.messages.$loaded().catch(alert);
-
+      //$scope.messages = filterByLoc($scope.messages, coords);
+      
       var s = document.querySelector('#status');
       
       if (s.className == 'success') {
@@ -124,5 +127,20 @@ angular.module('chatterApp')
     }
   
 
+    function filterByLoc(messages,coords){
+
+      var filtered = {};
+
+      for(var i = 0; i < messages.length; i++){
+        //if(isWithinRange(messages[i].gps.lat, messages[i].gps.lon, coords.lat, coords.lon))
+          filtered.push(messages[i]);
+      }
+
+      return filtered;
+    }
+
+    function isWithinRange(startLat,startLon, endLat, endLon){
+      return true;
+    }
 
 });
