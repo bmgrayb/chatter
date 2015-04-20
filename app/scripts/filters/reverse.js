@@ -31,7 +31,7 @@ angular.module('chatterApp')
 
 				console.log(d);
 
-				if(d < 3200 && j < 10 ){
+				if(d < 1600 && j < 10 ){
 					j++;
 					filtered[i] = messages[i];
 				}
