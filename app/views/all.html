@@ -8,40 +8,33 @@
       </div>	
 
 
-<div class="container"><!--
-<form ng-click="addMessage(newMessage);newMessage = null;">
-	<div class="input-group">
-		<input type="text" class="form-control" placeholder="Message..." ng-model="newMessage">
-		<div class="input-group-btn" >
-		<button class="btn btn-default" type="submit" >Submit</button></div>
-	</div>
-</form>
+<div class="container">
 
-<br>
-<hr> -->
+	<h1 align="center">All Messages</h1>
+	<p>This page shows your current geolocation on the map. It also shows every message posted to the chatter service. This is mainly for testing purposes to see that there are a 
+		lot of messages in our database and it is only pulling in ones within a mile of the user's current location.</p>
+
 <br>
 
 <article>
       <span id="status"><p>Finding your location: checking...</p></span>
 </article>
 
-
-
-
-<!--
-<ul class="list-group" id="messages" ng-show="messages.length">
-  <li class="list-group-item"  ng-repeat="message in messages | reverse">{{message.text}} {{message.randNum}}</li>
-</ul> -->
+<br>
+<p align="center"><a class="btn btn-lg btn-success" ng-href="#/chat">GET BACK TO CHATTERING</a></p>
+<br>
 
 <table class="table table-striped">
 	<tr>
-		<th align="center">LAT</th>
 		<th align="center">Message</th>
+		<th align="center">LAT</th>
+		<th align="center">LON</th>
 	</tr>
 
 	<tr ng-repeat="message in messages">
-		<td>{{message.gps.lat}}</td>
 		<td>{{message.text}}</td>
+		<td>{{message.gps.lat}}</td>
+		<td>{{message.gps.lon}}</td>
 	</tr>
 </table>
 

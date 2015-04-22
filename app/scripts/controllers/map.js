@@ -1,30 +1,18 @@
 'use strict';
 /**
  * @ngdoc function
- * @name chatterApp.controller:ChatCtrl
+ * @name chatterApp.controller:MapCtrl
  * @description
  * # ChatCtrl
  * A demo of using AngularFire to manage a synchronized list.
  */
 angular.module('chatterApp')
-  .controller('ChatCtrl', function ($scope, Ref, $firebaseArray, $timeout) {
-
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('MapCtrl', function ($scope, Ref, $firebaseArray, $timeout) {
 
     var coords = {};
     $scope.messages = null;
 
-    // synchronize a read-only, synchronized array of messages, limit to most recent 10
-    //$scope.messages = $firebaseArray(Ref.child('messages').limitToLast(10));
 
-    // display any errors
-    //$scope.messages.$loaded().catch(alert);
-
-    // provide a method for adding a message
     $scope.addMessage = function(newMessage) {
       if( newMessage ) {
         if(coords.length ===0){
@@ -35,6 +23,24 @@ angular.module('chatterApp')
         $scope.messages.$add({text: newMessage, gps: coords})
           // display any errors
           .catch(alert);
+
+          var latlng = new google.maps.LatLng(coords.lat, coords.lon);
+          var myOptions = {
+            zoom: 13,
+            center: latlng,
+            mapTypeControl: false,
+            navigationControlOptions: {style: google.maps.NavigationControlStyle.SMALL},
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+          };
+          var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
+          
+          
+          var marker = new google.maps.Marker({
+              position: latlng, 
+              map: map, 
+              title: newMessage
+          });
+
       }     
 
     };
@@ -56,12 +62,11 @@ angular.module('chatterApp')
       coords['lat'] = position.coords.latitude;
       coords['lon'] = position.coords.longitude;
       $scope.gps = coords;
-
-      //var fbMsg = 
+  
       $scope.messages = $firebaseArray(Ref.child('messages'));
       $scope.messages.$loaded().catch(alert);
-      //$scope.messages = filterByLoc($scope.messages, coords);
-      
+
+
       var s = document.querySelector('#status');
       
       if (s.className == 'success') {
@@ -89,18 +94,36 @@ angular.module('chatterApp')
       };
       var map = new google.maps.Map(document.getElementById("mapcanvas"), myOptions);
       
-      var populationOptions = {
-          strokeColor: '#FF0000',
-          strokeOpacity: 0.8,
-          strokeWeight: 2,
-          fillColor: '#FF0000',
-          fillOpacity: 0.35,
-          map: map,
-          center: latlng,
-          radius: 1600
-        };
-        // Add the circle for this city to the map.
-        var cityCircle = new google.maps.Circle(populationOptions);
+      
+      var marker = new google.maps.Marker({
+          position: latlng, 
+          map: map, 
+          title:"You are here! (at least within a "+position.coords.accuracy+" meter radius)"
+      });
+
+
+      $scope.$watch('messages', function () {
+        
+        var currMarker;
+
+        $scope.messages.forEach(function (message) {
+        
+          if(typeof message.gps === 'undefined'){
+        
+          }
+          else{
+            var ll = new google.maps.LatLng(message.gps.lat, message.gps.lon);
+
+            currMarker = new google.maps.Marker({
+                position: ll, 
+                map: map, 
+                title:message.text
+            });
+          }
+
+        });
+        
+      }, true);
 
     }
 
@@ -119,21 +142,5 @@ angular.module('chatterApp')
       error('not supported');
     }
   
-
-    function filterByLoc(messages,coords){
-
-      var filtered = {};
-
-      for(var i = 0; i < messages.length; i++){
-        //if(isWithinRange(messages[i].gps.lat, messages[i].gps.lon, coords.lat, coords.lon))
-          filtered.push(messages[i]);
-      }
-
-      return filtered;
-    }
-
-    function isWithinRange(startLat,startLon, endLat, endLon){
-      return true;
-    }
 
 });

@@ -29,7 +29,7 @@ angular.module('chatterApp')
 
 				var d = R * c; 
 
-				console.log(d);
+				//console.log(d);
 
 				if(d < 1600 && j < 10 ){
 					j++;

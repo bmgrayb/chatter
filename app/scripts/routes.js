@@ -74,6 +74,10 @@ angular.module('chatterApp')
         templateUrl: 'views/all.html',
         controller: 'ChatCtrl'
       })
+      .when('/map', {
+        templateUrl: 'views/map.html',
+        controller: 'MapCtrl'
+      })
       .whenAuthenticated('/account', {
         templateUrl: 'views/account.html',
         controller: 'AccountCtrl'

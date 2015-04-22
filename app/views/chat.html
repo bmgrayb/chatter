@@ -7,30 +7,6 @@
         </div>
       </div>	
 
-<!--
-<div class="container">
-<h2>Chat</h2>
-
-<form>
-  <input placeholder="Message..." ng-model="newMessage">
-  <button type="submit" ng-click="addMessage(newMessage);newMessage = null;">send</button>
-</form>
-
-<ul id="messages" ng-show="messages.length">
-  <li ng-repeat="message in messages | reverse">{{message.text}}</li>
-</ul>
-
-<p class="alert alert-danger" ng-show="err">{{err}}</p>
-</div>
-
--->
-
-
-<!--
-<form>
-  <input placeholder="Message..." ng-model="newMessage">
-  <button type="submit" ng-click="addMessage(newMessage);newMessage = null;">send</button>
-</form> -->
 <div class="container">
 <form ng-click="addMessage(newMessage);newMessage = null;">
 	<div class="input-group">
@@ -57,13 +33,11 @@
 </ul> -->
 
 <table class="table table-striped">
-	<tr>
-		<th align="center">LAT</th>
-		<th align="center">Message</th>
+	<tr align="center">
+		<th>Message</th>
 	</tr>
 
 	<tr ng-repeat="message in messages | reverse:this">
-		<td>{{message.gps.lat}}</td>
 		<td>{{message.text}}</td>
 	</tr>
 </table>
