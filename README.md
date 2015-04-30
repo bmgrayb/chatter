@@ -1,12 +1,16 @@
 # chatter
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 1.0.0.
+This project was developed by Brandon Graybeal and Chris O'brein for educational purposes only as the final project for IT354.
 
 ## Build & development
 
-Run `grunt` for building and `grunt serve` for preview.
+###Dependencies
 
-## Testing
+'npm' and 'bower'
 
-Running `grunt test` will run the unit tests with karma.
+###To Run
+
+First run `npm install` from the root to install all dependencies.
+
+Run `grunt` for building and `grunt serve --force` for preview.
+
